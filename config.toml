@@ -1,0 +1,12 @@
+baseURL = "https://example.com/"
+languageCode = "en-us"
+title = "Rare Candy Reserve"
+# Replace with your Stripe publishable key when using client-side integrations
+[params]
+  stripe_publishable_key = "pk_test_YOUR_PUBLISHABLE_KEY"
+
+[permalinks]
+  products = "/products/:slug/"
+
+[outputs]
+  home = ["HTML"]

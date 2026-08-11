@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ .Title }} - Rare Candy Reserve</title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <header>
+      <img src="/images/logo.png" alt="Rare Candy Reserve logo" style="max-height:80px;">
+      <nav><a href="/">Home</a> · <a href="/products/">Products</a> · <a href="/music/">Music</a></nav>
+    </header>
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+    <footer>© Rare Candy Reserve</footer>
+  </body>
+</html>

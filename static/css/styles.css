@@ -1,0 +1,5 @@
+body{font-family:Segoe UI,Arial,Helvetica,sans-serif;margin:0;padding:1rem;background:#0f0f0f;color:#eee}
+header{display:flex;align-items:center;gap:1rem;padding:0.5rem 1rem;background:#111}
+av a{color:#9be7ff;text-decoration:none;margin-right:0.5rem}
+main{padding:1rem}
+.buy-button{display:inline-block;padding:0.6rem 1rem;background:#ff6b6b;color:#fff;border-radius:6px;text-decoration:none}

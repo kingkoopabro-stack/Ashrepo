@@ -1,0 +1,8 @@
+﻿How to add local media and preview the site:
+
+1. Put images in static/images/ or uploads/images/ (e.g., logo.png).
+2. Put audio files in static/music/ or uploads/music/ using the filenames referenced in the site (Enough_is_never_enough.wav, Gameshark_User.wav, Dont_do_me_dirty.mp3).
+3. To preview the static site without Hugo: open public\index.html in your browser.
+4. To use Hugo (recommended): install Hugo, run `hugo` to build into public/, then open public/index.html or run `hugo server -D` for live reload.
+
+If you want, attach files here and I can copy them into these folders for you.
