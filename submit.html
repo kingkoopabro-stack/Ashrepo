@@ -1,0 +1,14 @@
+﻿<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Submit Music - Rare Candy Reserve</title><link rel="stylesheet" href="/css/styles.css"></head><body>
+<header><img src="/images/logo.png" style="height:64px"><nav><a href="/">Home</a></nav></header>
+<main class="container"><section class="card"><h1>Submit Your Music</h1>
+<p>Use the form below to submit tracks for consideration. This requires a backend to accept uploads — configure with Formspree or a small server. The form here is a placeholder that posts to Formspree; replace the action with your endpoint.</p>
+<form action="https://formspree.io/f/your-form-id" method="POST" enctype="multipart/form-data">
+  <label>Artist / Name: <input type="text" name="artist" required></label><br><br>
+  <label>Track Title: <input type="text" name="title" required></label><br><br>
+  <label>Email: <input type="email" name="email" required></label><br><br>
+  <label>Track file (mp3/wav): <input type="file" name="track" accept="audio/*" required></label><br><br>
+  <label><input type="checkbox" name="consent" required> I agree to allow Rare Candy Reserve and Vita Nova Records to play this track on the website and contact me about partnerships.</label><br><br>
+  <button type="submit">Submit Track</button>
+</form>
+</section></main></body></html>
