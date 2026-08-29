@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rare Candy Reserve</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <img class="banner" src="/images/a75ab98a-c055-41bf-a08e-fecf8aa1abee-Rare_Candy_Reserve_LOGO.png" alt="banner">
+    <div class="header-row">
+      <button class="inv-toggle" id="invToggle">☰</button>
+      <img class="logo" src="/images/a75ab98a-c055-41bf-a08e-fecf8aa1abee-Rare_Candy_Reserve_LOGO.png" alt="logo">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/products.html">Products</a>
+        <a href="/music.html">Music</a>
+        <a href="/submit.html">Submit</a>
+        <a href="/auction.html">Auction House</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Inventory Drawer -->
+  <aside class="inv-drawer" id="invDrawer" aria-hidden="true">
+    <h3>Inventory</h3>
+    <p style="color:#9aa;margin-top:0">Quick categories — click to browse</p>
+    <div class="inv-grid">
+      <div class="inv-item"><img src="/images/b8409556-b488-456b-b63f-2fbba1039b8f-049a0d2b-37d8-4207-aa34-a57dd5098146.png" alt="Auth"><div>Authenticated</div></div>
+      <div class="inv-item"><img src="/images/fd22ed70-971a-435a-bdc3-5b7d048ee5c9-Rare_candy_reserve_500kb.png" alt="Cards"><div>Graded</div></div>
+      <div class="inv-item"><img src="/images/c60bf3e9-5941-49d8-a0d4-d354d3a51807-Rare_Candy_Reserve_LOGO.png" alt="Comics"><div>Comics</div></div>
+      <div class="inv-item"><img src="/images/dc9abfcb-eb16-4161-9792-5bff73e42560-VNR_website_design.png" alt="Figures"><div>Figures & Art</div></div>
+      <div class="inv-item"><img src="/images/logo.png" alt="3D"><div>Custom 3D Prints</div></div>
+      <div class="inv-item"><img src="/images/logo.png" alt="Clothing"><div>Clothing</div></div>
+    </div>
+    <hr style="border-color:rgba(255,255,255,0.03)">
+    <div style="margin-top:0.6rem"><button class="button-ghost" id="closeInv">Close</button></div>
+  </aside>
+
+  <main class="container">
+    <section class="card">
+      <div class="player">
+        <button id="prevBtn">⏮</button>
+        <button id="playBtn">▶</button>
+        <button id="nextBtn">⏭</button>
+        <div class="title" id="trackInfo">Loading...</div>
+        <label>Vol <input id="vol" type="range" min="0" max="1" step="0.01" value="0.8"></label>
+        <div class="socials">
+          <a class="spotify" href="https://open.spotify.com/artist/5Yu8YngzEdVTot78vdFgnB?si=Mqjo7Sk_QTSaHr73mWOELQ" target="_blank">Spotify</a>
+          <a class="pandora" href="https://www.pandora.com/artist/a-steady-heart/ARpnXxfJ9zZrbK6" target="_blank">Pandora</a>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:0.5rem;color:#c9f7ff">Now showing: <strong>A Steady Heart</strong> — Vita Nova Records 2026</p>
+      <p style="text-align:center;color:#9cc">Theme: "Enough is never enough" (randomized playlist)</p>
+      <p style="text-align:center;color:#cbd;max-width:780px;margin:0.6rem auto">He is creative in quite a few ways when he is not building something amazing — writing and playing music to bring a smile or tear to the listener. Working hard for the people he hopes to help in this sometimes dark world.</p>
+    </section>
+
+    <section class="card">
+      <h2>Shop Categories</h2>
+      <div class="grid">
+        <div class="cat">Authenticated Cards</div>
+        <div class="cat">Graded Cards</div>
+        <div class="cat">Comics</div>
+        <div class="cat">Figures & Art</div>
+        <div class="cat">Custom 3D Prints</div>
+        <div class="cat">Clothing</div>
+        <div class="cat">Electronics</div>
+        <div class="cat">Creators</div>
+        <div class="cat">Filament Vendors</div>
+        <div class="cat">Toys & Plushies</div>
+        <div class="cat">Card Holders</div>
+        <div class="cat">Auction House</div>
+      </div>
+    </section>
+
+  </main>
+  <div class="hud neon-outline">Inventory</div>
+  <footer class="footer">© Rare Candy Reserve • Vita Nova Research • 7-Acre Wood Plant Nursery</footer>
+
+<script>
+// Player + playlist control (randomized)
+(async function(){
+  try{
+    const resp = await fetch('/music/playlist.json');
+    const list = await resp.json();
+    if(!list || list.length===0){ document.getElementById('trackInfo').textContent='No tracks found'; return }
+    // shuffle
+    for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [list[i], list[j]] = [list[j], list[i]] }
+    let idx = 0; const audio = new Audio(list[0].file);
+    const info = document.getElementById('trackInfo'); const playBtn = document.getElementById('playBtn'); const prevBtn = document.getElementById('prevBtn'); const nextBtn = document.getElementById('nextBtn'); const vol = document.getElementById('vol');
+    function update(){ info.textContent = list[idx].title; audio.src = list[idx].file }
+    update(); audio.volume = parseFloat(vol.value||0.8);
+    playBtn.addEventListener('click', ()=> { if(audio.paused) { audio.play(); playBtn.textContent='⏸' } else { audio.pause(); playBtn.textContent='▶' } })
+    prevBtn.addEventListener('click', ()=>{ idx = (idx-1+list.length)%list.length; update(); audio.play(); playBtn.textContent='⏸' })
+    nextBtn.addEventListener('click', ()=>{ idx = (idx+1)%list.length; update(); audio.play(); playBtn.textContent='⏸' })
+    vol.addEventListener('input', ()=>{ audio.volume = parseFloat(vol.value) })
+    audio.addEventListener('ended', ()=>{ idx = (idx+1)%list.length; update(); audio.play() })
+  } catch(e){ console.error(e); document.getElementById('trackInfo').textContent='Player error' }
+})();
+
+// Inventory drawer toggle
+const invToggle = document.getElementById('invToggle'); const invDrawer = document.getElementById('invDrawer'); const closeInv = document.getElementById('closeInv');
+invToggle.addEventListener('click', ()=>{ const open = invDrawer.classList.toggle('open'); invDrawer.setAttribute('aria-hidden', (!open).toString()) })
+if (closeInv) closeInv.addEventListener('click', ()=>{ invDrawer.classList.remove('open'); invDrawer.setAttribute('aria-hidden','true') })
+
+// Simple keyboard shortcut: I to toggle
+document.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='i'){ invDrawer.classList.toggle('open') } })
+</script>
+</body>
+</html>

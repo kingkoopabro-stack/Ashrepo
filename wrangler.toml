@@ -1,0 +1,18 @@
+# Cloudflare Pages Build & Routing Configuration
+# This file tells Cloudflare how to route traffic to different directories
+
+name = "Rare Candy Reserve"
+main = "public"  # Default: serve /public for rarecandyreserve.org
+build = { command = "echo Build complete" }
+
+# Routes:
+# rarecandyreserve.org  → /public (production, locked)
+# dev.rarecandyreserve.org → /dev (password-protected development)
+# 
+# To set this up:
+# 1. In Cloudflare Dashboard, go to Pages > Your Project > Settings
+# 2. Add a new route: dev.rarecandyreserve.org → /dev
+# OR use wrangler.toml with build config
+
+env.production = { vars = { ENV = "production" } }
+env.development = { vars = { ENV = "development" } }
