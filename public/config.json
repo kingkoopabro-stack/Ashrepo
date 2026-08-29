@@ -1,0 +1,83 @@
+{
+  "site": {
+    "title": "Rare Candy Reserve",
+    "domain": "https://rarecandyreserve.org",
+    "label": "Vita Nova Records 2026",
+    "description": "He is creative in quite a few ways when he is not building something amazing — writing and playing music to bring a smile or tear to the listener. Working hard for the people he hopes to help in this sometimes dark world."
+  },
+
+  "music": {
+    "spotifyArtistId": "5Yu8YngzEdVTot78vdFgnB",
+    "spotifyArtistUrl": "https://open.spotify.com/artist/5Yu8YngzEdVTot78vdFgnB?si=Mqjo7Sk_QTSaHr73mWOELQ",
+    "pandoraUrl": "https://www.pandora.com/artist/a-steady-heart/ARpnXxfJ9zZrbK6",
+    "appleUrl": "https://music.apple.com/us/artist/a-steady-heart/1870402975",
+    "spotifyEmbedTrackId": "5BYgK8ezleNqwQz4RiAleA",
+    "artistName": "A Steady Heart",
+    "themeTrack": "Enough is never enough"
+  },
+
+  "payment": {
+    "stripePublishableKey": "pk_live_YOUR_KEY_HERE",
+    "paypalClientId": "YOUR_PAYPAL_CLIENT_ID",
+    "squareLocationId": "YOUR_SQUARE_LOCATION_ID",
+    "defaultProvider": "stripe"
+  },
+
+  "categories": [
+    { "name": "Authenticated Cards", "icon": "/images/b8409556-b488-456b-b63f-2fbba1039b8f-049a0d2b-37d8-4207-aa34-a57dd5098146.png" },
+    { "name": "Graded Cards", "icon": "/images/fd22ed70-971a-435a-bdc3-5b7d048ee5c9-Rare_candy_reserve_500kb.png" },
+    { "name": "Comics", "icon": "/images/c60bf3e9-5941-49d8-a0d4-d354d3a51807-Rare_Candy_Reserve_LOGO.png" },
+    { "name": "Figures & Art", "icon": "/images/dc9abfcb-eb16-4161-9792-5bff73e42560-VNR_website_design.png" },
+    { "name": "Custom 3D Prints", "icon": "/images/logo.png" },
+    { "name": "Clothing", "icon": "/images/logo.png" },
+    { "name": "Electronics", "icon": "/images/logo.png" },
+    { "name": "Creators", "icon": "/images/logo.png" },
+    { "name": "Filament Vendors", "icon": "/images/logo.png" },
+    { "name": "Toys & Plushies", "icon": "/images/logo.png" },
+    { "name": "Card Holders", "icon": "/images/logo.png" },
+    { "name": "Auction House", "icon": "/images/logo.png" }
+  ],
+
+  "products": [
+    {
+      "id": "custom-3d-print",
+      "name": "Custom 3D Print",
+      "price": 25.00,
+      "description": "Commission a custom 3D print from our Bambu A1 Combo printer",
+      "category": "Custom 3D Prints",
+      "ctaText": "Request Quote",
+      "ctaUrl": "/submit.html"
+    },
+    {
+      "id": "graded-card",
+      "name": "Graded Card",
+      "price": 49.99,
+      "description": "Authenticated and graded trading cards",
+      "category": "Graded Cards",
+      "ctaText": "Browse Cards",
+      "ctaUrl": "/products.html"
+    },
+    {
+      "id": "commission",
+      "name": "Custom Commission",
+      "price": 50.00,
+      "description": "Have us create something special for your collection",
+      "category": "Creators",
+      "ctaText": "Submit Project",
+      "ctaUrl": "/submit.html"
+    }
+  ],
+
+  "partners": [
+    {
+      "name": "7-Acre Wood Plant Nursery",
+      "url": "https://7acrewoods.com"
+    },
+    {
+      "name": "Vita Nova Research",
+      "url": "https://vitanova.research"
+    }
+  ],
+
+  "footer": "© Rare Candy Reserve • Vita Nova Research • 7-Acre Wood Plant Nursery"
+}
