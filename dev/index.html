@@ -146,47 +146,86 @@
   function loadDevPortal() {
     document.body.innerHTML = `
       <div style="max-width:1200px;margin:0 auto;padding:2rem">
-        <button style="position:absolute;top:1rem;right:1rem;padding:0.5rem 1rem;background:#ff4444;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:700" onclick="logout()">Logout</button>
+        <button style="position:absolute;top:1rem;right:1rem;padding:0.5rem 1rem;background:#ff4444;color:white;border:none;border-radius:8px;cursor:pointer;font-weight:700" onclick="logout()">🚪 Logout</button>
         
-        <h1 style="color:#ffd6ff">Dev Portal — Rare Candy Reserve</h1>
+        <h1 style="color:#ffd6ff">🔐 Dev Portal — Rare Candy Reserve</h1>
         <div style="background:rgba(255,102,204,0.1);border-left:4px solid #ff66cc;padding:1rem;border-radius:8px;margin:1rem 0">
-          <p style="margin:0;color:#ffd6ff"><strong>⚠️ Development Environment</strong></p>
-          <p style="margin:0.5rem 0 0 0;color:#cbd;font-size:0.9rem">This is your secure testing area. Changes here do NOT affect rarecandyreserve.org until you deploy them.</p>
+          <p style="margin:0;color:#ffd6ff"><strong>✓ You are authenticated</strong></p>
+          <p style="margin:0.5rem 0 0 0;color:#cbd;font-size:0.9rem">You can now edit your website. Changes here are <strong>separate from rarecandyreserve.org</strong> until you push them to production.</p>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin:2rem 0">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin:2rem 0">
           
-          <div style="background:rgba(20,10,40,0.8);border:1px solid rgba(255,102,204,0.2);border-radius:12px;padding:1.5rem">
-            <h3 style="color:#ff66cc;margin-top:0">📝 Edit Config</h3>
-            <p style="color:#cbd">Modify website content, products, music links, and more</p>
-            <p style="font-size:0.85rem;color:#999">Edit config.json in your code editor and push to deploy</p>
-            <button onclick="alert('See QUICK_EDIT_GUIDE.md in your repo for instructions')" style="background:linear-gradient(90deg,#ff66cc,#6b6bff);padding:0.6rem 1rem;margin-top:1rem;border:none;color:#04061a;border-radius:8px;cursor:pointer;font-weight:700">View Edit Guide</button>
+          <div style="background:rgba(20,10,40,0.8);border:1px solid rgba(255,102,204,0.3);border-radius:12px;padding:1.5rem;box-shadow:0 6px 20px rgba(255,102,204,0.1)">
+            <h3 style="color:#ff66cc;margin-top:0">📝 Edit Configuration</h3>
+            <p style="color:#cbd">Update your website without touching code</p>
+            <p style="font-size:0.85rem;color:#999;margin-bottom:1rem"><strong>What you can change:</strong></p>
+            <ul style="font-size:0.9rem;color:#cbd;margin:0;padding-left:1.2rem">
+              <li>Spotify track ID</li>
+              <li>Product names & prices</li>
+              <li>Images & URLs</li>
+              <li>Music streaming links</li>
+              <li>Social media links</li>
+            </ul>
+            <p style="font-size:0.8rem;color:#999;margin-top:1rem"><strong>How:</strong> Edit <code style="background:rgba(0,0,0,0.4);padding:0.2rem 0.4rem;border-radius:3px">config.json</code> in your code editor and push to GitHub</p>
           </div>
 
-          <div style="background:rgba(20,10,40,0.8);border:1px solid rgba(107,107,255,0.2);border-radius:12px;padding:1.5rem">
-            <h3 style="color:#6b6bff;margin-top:0">👁️ Preview Site</h3>
-            <p style="color:#cbd">See your current dev version</p>
-            <p style="font-size:0.85rem;color:#999">This shows the editable development copy</p>
-            <button onclick="location.href='http://localhost:8000'" style="background:linear-gradient(90deg,#6b6bff,#00ffd0);padding:0.6rem 1rem;margin-top:1rem;border:none;color:#04061a;border-radius:8px;cursor:pointer;font-weight:700">Local Preview</button>
+          <div style="background:rgba(20,10,40,0.8);border:1px solid rgba(107,107,255,0.3);border-radius:12px;padding:1.5rem;box-shadow:0 6px 20px rgba(107,107,255,0.1)">
+            <h3 style="color:#6b6bff;margin-top:0">🛠️ Development Tools</h3>
+            <p style="color:#cbd">Resources for editing your site</p>
+            <ul style="font-size:0.9rem;color:#cbd;margin:1rem 0;padding-left:1.2rem">
+              <li><strong>QUICK_EDIT_GUIDE.md</strong> — Editing instructions</li>
+              <li><strong>config.json</strong> — Site configuration file</li>
+              <li><strong>/public</strong> — Production site (locked)</li>
+              <li><strong>/dev</strong> — This development area</li>
+            </ul>
+            <button onclick="alert('See QUICK_EDIT_GUIDE.md and PROD_DEV_SETUP.md in your repo root')" style="background:linear-gradient(90deg,#6b6bff,#00ffd0);padding:0.6rem 1rem;margin-top:1rem;border:none;color:#04061a;border-radius:8px;cursor:pointer;font-weight:700;width:100%">📚 View Guides</button>
           </div>
 
-          <div style="background:rgba(20,10,40,0.8);border:1px solid rgba(0,255,208,0.2);border-radius:12px;padding:1.5rem">
+          <div style="background:rgba(20,10,40,0.8);border:1px solid rgba(0,255,208,0.3);border-radius:12px;padding:1.5rem;box-shadow:0 6px 20px rgba(0,255,208,0.1)">
             <h3 style="color:#00ffd0;margin-top:0">🚀 Deploy to Production</h3>
-            <p style="color:#cbd">Push changes to rarecandyreserve.org</p>
-            <p style="font-size:0.85rem;color:#999">Only do this after testing!</p>
-            <code style="background:rgba(0,0,0,0.4);padding:0.5rem;border-radius:4px;display:block;margin-top:0.5rem;font-size:0.85rem">git push origin main</code>
+            <p style="color:#cbd"><strong>Ready to go live?</strong></p>
+            <p style="font-size:0.9rem;color:#cbd;margin-bottom:1rem">Once you've tested your changes, copy them to /public and push:</p>
+            <code style="background:rgba(0,0,0,0.4);padding:0.75rem;border-radius:4px;display:block;margin:0.5rem 0;font-size:0.85rem;color:#00ffd0;border-left:2px solid #00ffd0">cp -r dev/* public/</code>
+            <code style="background:rgba(0,0,0,0.4);padding:0.75rem;border-radius:4px;display:block;margin:0.5rem 0;font-size:0.85rem;color:#00ffd0;border-left:2px solid #00ffd0">git push origin main</code>
+            <p style="font-size:0.8rem;color:#999;margin-top:0.5rem">Your changes will go live on rarecandyreserve.org in 30-60 seconds ✓</p>
           </div>
 
         </div>
 
         <div style="background:rgba(20,10,40,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.5rem;margin:2rem 0">
-          <h3 style="color:#ffd6ff">📚 Architecture</h3>
-          <ul style="color:#cbd">
-            <li><strong>/public:</strong> Production site (rarecandyreserve.org) — locked, no changes</li>
-            <li><strong>/dev:</strong> Development site (this password-protected portal)</li>
-            <li><strong>/production-locked:</strong> Backup of working version (rollback if needed)</li>
-            <li><strong>config.json:</strong> Edit in code editor to change site content</li>
-            <li><strong>Session Timeout:</strong> 12 hours for security</li>
+          <h3 style="color:#ffd6ff">⚙️ Environment Separation</h3>
+          <table style="width:100%;color:#cbd;border-collapse:collapse">
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
+              <th style="text-align:left;padding:0.5rem;color:#ffd6ff">Folder</th>
+              <th style="text-align:left;padding:0.5rem;color:#ffd6ff">URL</th>
+              <th style="text-align:left;padding:0.5rem;color:#ffd6ff">Purpose</th>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:0.5rem"><code>/public</code></td>
+              <td style="padding:0.5rem"><strong>rarecandyreserve.org</strong></td>
+              <td style="padding:0.5rem">📺 Production (LIVE) — locked, don't edit</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+              <td style="padding:0.5rem"><code>/dev</code></td>
+              <td style="padding:0.5rem"><strong>rarecandyreserve.org/dev/</strong></td>
+              <td style="padding:0.5rem">🔐 Development (protected) — you are here</td>
+            </tr>
+            <tr>
+              <td style="padding:0.5rem"><code>/production-locked</code></td>
+              <td style="padding:0.5rem">(backup only)</td>
+              <td style="padding:0.5rem">💾 Rollback copy — emergency restore</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background:rgba(255,200,0,0.08);border-left:4px solid #ffd700;padding:1rem;border-radius:8px;margin:2rem 0">
+          <p style="margin:0;color:#ffd6ff"><strong>⚡ Remember:</strong></p>
+          <ul style="color:#cbd;margin:0.5rem 0 0 0;padding-left:1.2rem">
+            <li><strong>Edit in /dev</strong> to test changes safely</li>
+            <li><strong>Test thoroughly</strong> before copying to /public</li>
+            <li><strong>Push to main branch</strong> to deploy to Cloudflare</li>
+            <li><strong>rarecandyreserve.org stays locked</strong> until you explicitly copy changes</li>
           </ul>
         </div>
       </div>
