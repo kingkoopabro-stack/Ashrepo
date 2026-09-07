@@ -16,8 +16,7 @@
         <a href="/">Home</a>
         <a href="/products.html">Products</a>
         <a href="/music.html">Music</a>
-        <a href="/submit.html">Submit</a>
-        <a href="/auction.html">Auction House</a>
+        <a href="/submit.html">Custom Projects</a>
       </nav>
     </div>
   </header>
@@ -40,19 +39,24 @@
 
   <main class="container">
     <section class="card">
-      <div class="player">
-        <button id="prevBtn">⏮</button>
-        <button id="playBtn">▶</button>
-        <button id="nextBtn">⏭</button>
-        <div class="title" id="trackInfo">Loading...</div>
-        <label>Vol <input id="vol" type="range" min="0" max="1" step="0.01" value="0.8"></label>
+      <div style="text-align:center">
+        <iframe
+          id="spotifyPlayer"
+          style="border-radius:12px;max-width:100%"
+          src="https://open.spotify.com/embed/track/5BYgK8ezleNqwQz4RiAleA?utm_source=generator"
+          width="50%"
+          height="152"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          title="A Steady Heart on Spotify"></iframe>
+        <p style="margin-top:0.5rem;color:#c9f7ff">A Steady Heart — <span id="trackInfo">Enough is never enough</span> — Vita Nova Records 2026</p>
         <div class="socials">
-          <a class="spotify" href="https://open.spotify.com/artist/5Yu8YngzEdVTot78vdFgnB?si=Mqjo7Sk_QTSaHr73mWOELQ" target="_blank">Spotify</a>
-          <a class="pandora" href="https://www.pandora.com/artist/a-steady-heart/ARpnXxfJ9zZrbK6" target="_blank">Pandora</a>
+          <a class="spotify" href="https://open.spotify.com/artist/5Yu8YngzEdVTot78vdFgnB?si=Mqjo7Sk_QTSaHr73mWOELQ" target="_blank" rel="noopener">Spotify</a>
+          <a class="pandora" href="https://www.pandora.com/artist/a-steady-heart/ARpnXxfJ9zZrbK6" target="_blank" rel="noopener">Pandora</a>
+          <a class="apple" href="https://music.apple.com/us/artist/a-steady-heart/1870402975" target="_blank" rel="noopener">Apple Music</a>
         </div>
       </div>
-      <p style="text-align:center;margin-top:0.5rem;color:#c9f7ff">Now showing: <strong>A Steady Heart</strong> — Vita Nova Records 2026</p>
-      <p style="text-align:center;color:#9cc">Theme: "Enough is never enough" (randomized playlist)</p>
       <p style="text-align:center;color:#cbd;max-width:780px;margin:0.6rem auto">He is creative in quite a few ways when he is not building something amazing — writing and playing music to bring a smile or tear to the listener. Working hard for the people he hopes to help in this sometimes dark world.</p>
     </section>
 
@@ -70,7 +74,7 @@
         <div class="cat">Filament Vendors</div>
         <div class="cat">Toys & Plushies</div>
         <div class="cat">Card Holders</div>
-        <div class="cat">Auction House</div>
+        <div class="cat"><a href="/submit.html">Custom Projects</a></div>
       </div>
     </section>
 
@@ -79,26 +83,6 @@
   <footer class="footer">© Rare Candy Reserve • Vita Nova Research • 7-Acre Wood Plant Nursery</footer>
 
 <script>
-// Player + playlist control (randomized)
-(async function(){
-  try{
-    const resp = await fetch('/music/playlist.json');
-    const list = await resp.json();
-    if(!list || list.length===0){ document.getElementById('trackInfo').textContent='No tracks found'; return }
-    // shuffle
-    for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [list[i], list[j]] = [list[j], list[i]] }
-    let idx = 0; const audio = new Audio(list[0].file);
-    const info = document.getElementById('trackInfo'); const playBtn = document.getElementById('playBtn'); const prevBtn = document.getElementById('prevBtn'); const nextBtn = document.getElementById('nextBtn'); const vol = document.getElementById('vol');
-    function update(){ info.textContent = list[idx].title; audio.src = list[idx].file }
-    update(); audio.volume = parseFloat(vol.value||0.8);
-    playBtn.addEventListener('click', ()=> { if(audio.paused) { audio.play(); playBtn.textContent='⏸' } else { audio.pause(); playBtn.textContent='▶' } })
-    prevBtn.addEventListener('click', ()=>{ idx = (idx-1+list.length)%list.length; update(); audio.play(); playBtn.textContent='⏸' })
-    nextBtn.addEventListener('click', ()=>{ idx = (idx+1)%list.length; update(); audio.play(); playBtn.textContent='⏸' })
-    vol.addEventListener('input', ()=>{ audio.volume = parseFloat(vol.value) })
-    audio.addEventListener('ended', ()=>{ idx = (idx+1)%list.length; update(); audio.play() })
-  } catch(e){ console.error(e); document.getElementById('trackInfo').textContent='Player error' }
-})();
-
 // Inventory drawer toggle
 const invToggle = document.getElementById('invToggle'); const invDrawer = document.getElementById('invDrawer'); const closeInv = document.getElementById('closeInv');
 invToggle.addEventListener('click', ()=>{ const open = invDrawer.classList.toggle('open'); invDrawer.setAttribute('aria-hidden', (!open).toString()) })

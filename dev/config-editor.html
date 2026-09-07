@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rare Candy Reserve Dev Editor</title>
+  <style>
+    :root { color-scheme: dark; --pink:#ff66cc; --blue:#6b6bff; --cyan:#00ffd0; }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:1rem; font:16px system-ui,sans-serif; color:#e8f0ff; background:#080316; }
+    main { max-width:1100px; margin:auto; }
+    h1 { color:#ffd6ff; }
+    .toolbar { display:flex; flex-wrap:wrap; gap:.6rem; margin:1rem 0; }
+    button, .button { border:0; border-radius:8px; padding:.7rem 1rem; font-weight:700; cursor:pointer; color:#050014; background:linear-gradient(90deg,var(--pink),var(--blue)); }
+    .button.secondary { background:linear-gradient(90deg,var(--cyan),var(--blue)); }
+    .panel { background:#120b20; border:1px solid #3b2859; border-radius:12px; padding:1rem; margin:1rem 0; }
+    label { display:block; margin:.8rem 0; color:#cbd; }
+    input, textarea { display:block; width:100%; margin-top:.35rem; padding:.65rem; border:1px solid #493466; border-radius:7px; color:#fff; background:#080512; }
+    textarea { min-height:420px; font:13px ui-monospace,monospace; }
+    #status { color:var(--cyan); min-height:1.4em; }
+    .notice { color:#ffd6ff; border-left:3px solid var(--pink); padding-left:.8rem; }
+  </style>
+</head>
+<body>
+<main>
+  <p><a href="./">← Dev portal</a></p>
+  <h1>Rare Candy Reserve — Config Editor</h1>
+  <p class="notice">This editor changes a downloaded copy in your browser. Export the JSON, replace <code>public/config.json</code> in your repo, and push it to publish. A static Cloudflare site cannot save files directly to GitHub.</p>
+  <section class="panel">
+    <h2>Quick fields</h2>
+    <label>Site title <input id="title"></label>
+    <label>Spotify track ID <input id="track"></label>
+    <label>Artist name <input id="artist"></label>
+    <label>Site description <textarea id="description"></textarea></label>
+    <div class="toolbar">
+      <button id="apply">Apply fields to JSON</button>
+      <button class="secondary" id="download">Download config.json</button>
+      <label class="button secondary">Import config.json <input id="upload" type="file" accept="application/json" hidden></label>
+    </div>
+    <div id="status" role="status"></div>
+  </section>
+  <section class="panel">
+    <h2>Advanced config</h2>
+    <textarea id="json" spellcheck="false" aria-label="Website configuration JSON"></textarea>
+  </section>
+</main>
+<script>
+  const json = document.querySelector('#json');
+  const status = document.querySelector('#status');
+  const fields = { title: document.querySelector('#title'), track: document.querySelector('#track'), artist: document.querySelector('#artist'), description: document.querySelector('#description') };
+  let config = {};
+  function show(message) { status.textContent = message; }
+  function syncFields() {
+    fields.title.value = config.site?.title || '';
+    fields.track.value = config.music?.spotifyEmbedTrackId || '';
+    fields.artist.value = config.music?.artistName || '';
+    fields.description.value = config.site?.description || '';
+  }
+  function readJson() {
+    try { config = JSON.parse(json.value); syncFields(); return true; }
+    catch (error) { show(`Invalid JSON: ${error.message}`); return false; }
+  }
+  fetch('../config.json').then(response => response.json()).then(data => {
+    config = data; json.value = JSON.stringify(config, null, 2); syncFields();
+  }).catch(error => show(`Could not load config.json: ${error.message}`));
+  document.querySelector('#apply').onclick = () => {
+    if (!readJson()) return;
+    config.site = config.site || {}; config.music = config.music || {};
+    config.site.title = fields.title.value; config.site.description = fields.description.value;
+    config.music.spotifyEmbedTrackId = fields.track.value; config.music.artistName = fields.artist.value;
+    json.value = JSON.stringify(config, null, 2); show('Fields applied. Download the file to publish changes.');
+  };
+  document.querySelector('#download').onclick = () => {
+    if (!readJson()) return;
+    const blob = new Blob([JSON.stringify(config, null, 2)], { type:'application/json' });
+    const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'config.json'; link.click(); URL.revokeObjectURL(link.href);
+    show('Downloaded config.json.');
+  };
+  document.querySelector('#upload').onchange = event => {
+    const file = event.target.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => { json.value = reader.result; if (readJson()) show('Imported config.json.'); };
+    reader.readAsText(file);
+  };
+</script>
+</body>
+</html>
